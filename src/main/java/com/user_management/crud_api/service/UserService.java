@@ -39,14 +39,17 @@ public class UserService {
 		if (userRepository.findByEmail(user.getEmail()).isPresent()) {
 			throw new DuplicateResourceException("User with email " + user.getEmail() + " already exists");
 		}
-		if (!user.getEmail().contains("@")) {
-			throw new InvalidInputException("Invalid email format");
-		}
 
 		if (user.getAge() <= 0) {
 			throw new InvalidInputException("Age must Not Be Negative");
 		}
-		return userRepository.save(user);
+		try {
+			return userRepository.save(user);
+		}
+		catch(InvalidInputException e) {
+			throw new InvalidInputException(e.getMessage()); 
+		}
+		
 	}
 
 	@Transactional

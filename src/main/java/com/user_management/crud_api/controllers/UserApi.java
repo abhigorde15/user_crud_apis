@@ -40,7 +40,8 @@ public interface UserApi {
 	@Operation(summary = "Update user", description = "Updates an existing user by ID.")
 	@ApiResponses({
 			@ApiResponse(responseCode = "200", description = "User updated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
-			@ApiResponse(responseCode = "404", description = "User not found") })
+			@ApiResponse(responseCode = "404", description = "User not found"),
+			@ApiResponse(responseCode = "409", description = "Duplicate User Found")})
 	ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody User user);
 
 	@DeleteMapping("/{id}")

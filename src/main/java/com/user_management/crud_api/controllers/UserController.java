@@ -62,10 +62,11 @@ public class UserController implements UserApi {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                                  .body( e.getMessage());
         }
-        catch(InvalidInputException e) {
+        catch(Exception e) {
         	return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body( e.getMessage());
         }
+        
     }
 
 
