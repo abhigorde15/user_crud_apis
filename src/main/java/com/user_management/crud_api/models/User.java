@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "user_data")
 public class User {
-	    public User( String name,
+	public User(String name,
 			@Email(message = "Invalid email format") @NotBlank(message = "Email cannot be empty") String email,
 			@Min(value = 1, message = "Age must be greater than 0") Integer age) {
 		super();
@@ -18,65 +18,56 @@ public class User {
 		this.age = age;
 	}
 
-		@Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    @Column(nullable = false)
-	    private String name;
-	    
-	    @Column(nullable = false, unique = true)
-	    @Email(message = "Invalid email format")
-	    @NotBlank(message = "Email cannot be empty")
-	    private String email;
-	    
-	    @Column(nullable = false)
-	    @Min(value = 1, message = "Age must be greater than 0")
-	    private Integer age;
-        
-	    
-	    public User() {}
-	    
-		
-	    public Long getId() {
-			return id;
-		}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@Column(nullable = false)
+	@Size(min = 2, message = "Name must have at least 2 characters")
+	private String name;
 
-		
-		public String getName() {
-			return name;
-		}
+	@Column(nullable = false, unique = true)
+	@Email(message = "Invalid email format")
+	@NotBlank(message = "Email cannot be empty")
+	private String email;
 
-		
-		public void setName(String name) {
-			this.name = name;
-		}
+	@Column(nullable = false)
+	@Min(value = 1, message = "Age must be greater than 0")
+	private Integer age;
 
-		
-		public String getEmail() {
-			return email;
-		}
+	public User() {
+	}
 
-		
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		
-		public Integer getAge() {
-			return age;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		
-		public void setAge(Integer age) {
-			this.age = age;
-		}
-	    
-	    
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
 }
